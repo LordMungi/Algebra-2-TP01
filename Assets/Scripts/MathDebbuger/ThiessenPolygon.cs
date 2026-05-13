@@ -20,10 +20,9 @@ public class ThiessenPolygon
 
     public void RemoveRedundantPlanes()
     {
-        Planes.Sort((a, b) => MathF.Abs(b.GetDistanceToPoint(center)).CompareTo(MathF.Abs(a.GetDistanceToPoint(center))));
         for (int i = Planes.Count - 1; i >= 0; i--)
         {
-            if (Planes.Count <= 1) break;
+            //if (Planes.Count <= 1) break;
             if (isPlaneRedundant(i))
                 Planes.RemoveAt(i);
         }
@@ -37,11 +36,9 @@ public class ThiessenPolygon
         {
             if (i == planeIndex) continue;
 
-            if (Planes[i].GetSide(closestPointToCenter))
-            {
-                return false;
-            }
+            if (!Planes[i].GetSide(closestPointToCenter))
+                return true;
         }
-        return true;
+        return false;
     }
 }
