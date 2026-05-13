@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Thiessen : MonoBehaviour
 {
-    [SerializeField] private GameObject pointPrefab;
+    [SerializeField] private GameObject PlanePrefab;
+    [SerializeField] private GameObject PointPrefab;
     [SerializeField] private GameObject PointsOfInterestObjects;
 
     private List<Vec3> PointsOfInterest;
@@ -24,7 +25,10 @@ public class Thiessen : MonoBehaviour
         {
             for (int j = i + 1; j < PointsOfInterest.Count; j++)
             {
-                Instantiate(pointPrefab, PointsOfInterest[i] + (PointsOfInterest[j] - PointsOfInterest[i]) / 2, transform.rotation);
+                MyPlane plane = new MyPlane(PointsOfInterest[j] - PointsOfInterest[i], PointsOfInterest[i] + (PointsOfInterest[j] - PointsOfInterest[i]) / 2);
+
+                Instantiate(PointPrefab, PointsOfInterest[i] + (PointsOfInterest[j] - PointsOfInterest[i]) / 2, transform.rotation);
+                Instantiate(PlanePrefab, PointsOfInterest[i] + (PointsOfInterest[j] - PointsOfInterest[i]) / 2, Quaternion.FromToRotation(Vec3.Up, plane.normal));
             }
         }
     }

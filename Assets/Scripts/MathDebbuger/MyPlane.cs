@@ -19,19 +19,19 @@ namespace CustomMath
 
         #region Constructors
 
-        MyPlane(Vec3 inNormal, Vec3 inPoint)
+        public MyPlane(Vec3 inNormal, Vec3 inPoint)
         {
             normal = inNormal.normalized;
             distance = Vec3.Dot(normal, inPoint);
         }
 
-        MyPlane(Vec3 inNormal, float d)
+        public MyPlane(Vec3 inNormal, float d)
         {
             normal = inNormal.normalized;
             distance = d;
         }
 
-        MyPlane(Vec3 a, Vec3 b, Vec3 c)
+        public MyPlane(Vec3 a, Vec3 b, Vec3 c)
         {
             normal = Vec3.Cross(b - a, c - a).normalized;
             distance = Vec3.Dot(normal, a);

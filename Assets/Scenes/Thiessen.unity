@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff9b21e01892de448441126789ad279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Thiessen
-  pointPrefab: {fileID: 3969454537633966463, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
+  PlanePrefab: {fileID: 1168870145973621294, guid: 00a4f12dc9629054d83f643deda97ecc, type: 3}
+  PointPrefab: {fileID: 3969454537633966463, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
   PointsOfInterestObjects: {fileID: 648390038}
 --- !u!1001 &786005655
 PrefabInstance:
@@ -403,15 +404,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 388604600030805938, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 388604600030805938, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.72
+      value: -6.28
       objectReference: {fileID: 0}
     - target: {fileID: 388604600030805938, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 388604600030805938, guid: adac23d877dd3dd49bf11613c7cec1a7, type: 3}
       propertyPath: m_LocalRotation.w
