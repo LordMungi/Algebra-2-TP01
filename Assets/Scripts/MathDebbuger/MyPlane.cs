@@ -13,6 +13,10 @@ namespace CustomMath
 
         #endregion
 
+        #region Constants
+        public const float epsilon = 1e-05f;
+        #endregion
+
         #region Constructors
 
         MyPlane(Vec3 inNormal, Vec3 inPoint)
@@ -39,66 +43,65 @@ namespace CustomMath
 
         public static bool operator ==(MyPlane lhs, MyPlane rhs)
         {
-            throw new NotImplementedException();
+            return lhs.normal == rhs.normal && MathF.Abs(lhs.distance - rhs.distance) < epsilon;
         }
 
         public static bool operator !=(MyPlane lhs, MyPlane rhs)
         {
-            throw new NotImplementedException();
+            return !(lhs == rhs);
         }
 
         #endregion
 
         #region Functions
 
-        public MyPlane Translate(MyPlane plane, Vec3 translation)
+        public static MyPlane Translate(MyPlane plane, Vec3 translation)
         {
-            throw new NotImplementedException();
+            return new MyPlane(plane.normal, Vec3.Dot(plane.normal, (plane.normal * plane.distance) + translation));
         }
 
         public Vec3 ClosestPointOnPlane(Vec3 point)
         {
-            throw new NotImplementedException();
+            return point + normal * (distance - Vec3.Dot(normal, point));
         }
 
         public void Flip()
         {
-            throw new NotImplementedException();
+            this = planeFlipped;
         }
 
         public float GetDistanceToPoint(Vec3 point)
         {
-            throw new NotImplementedException();
+            return Vec3.Dot(normal, point) - distance;
         }
 
         public bool GetSide(Vec3 point)
         {
-            throw new NotImplementedException();
+            return Vec3.Dot(normal, point) >= distance;
         }
 
         public bool SameSide(Vec3 inPt0, Vec3 inPt1)
         {
-            throw new NotImplementedException();
+            return GetSide(inPt0) == GetSide(inPt1);
         }
 
         public void Set3Points(Vec3 a, Vec3 b, Vec3 c)
         {
-            throw new NotImplementedException();
+            this = new MyPlane(a, b, c);
         }
 
         public void SetNormalAndPosition(Vec3 inNormal, Vec3 inPoint)
         {
-            throw new NotImplementedException();
+            this = new MyPlane(inNormal, inPoint);
         }
 
         public void Translate(Vec3 translation)
         {
-            throw new NotImplementedException();
+            this = Translate(this, translation);
         }
-
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Normal = (" + normal.x.ToString() + ", " + normal.y.ToString() + ", " + normal.z.ToString() + ") Distance = " + distance.ToString();
         }
 
         #endregion
@@ -107,17 +110,18 @@ namespace CustomMath
 
         public override bool Equals(object other)
         {
-            throw new NotImplementedException();
+            if (!(other is MyPlane)) return false;
+            return Equals((MyPlane)other);
         }
 
         public bool Equals(MyPlane other)
         {
-            throw new NotImplementedException();
+            return this == other;
         }
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return HashCode.Combine(normal, distance);
         }
 
         #endregion

@@ -17,7 +17,7 @@ namespace CustomMath
         public float magnitude { get { return MathF.Sqrt(sqrMagnitude); } }
         #endregion
 
-        #region constants
+        #region Constants
         public const float epsilon = 1e-05f;
         #endregion
 
