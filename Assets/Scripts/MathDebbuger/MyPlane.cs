@@ -9,7 +9,7 @@ namespace CustomMath
         public Vec3 normal;
         public float distance;
 
-        public MyPlane planeFlipped { get { throw new NotImplementedException(); } }
+        public MyPlane planeFlipped { get { return new MyPlane(-normal, -distance); } }
 
         #endregion
 
@@ -17,17 +17,20 @@ namespace CustomMath
 
         MyPlane(Vec3 inNormal, Vec3 inPoint)
         {
-            throw new NotImplementedException();
+            normal = inNormal.normalized;
+            distance = Vec3.Dot(normal, inPoint);
         }
 
         MyPlane(Vec3 inNormal, float d)
         {
-            throw new NotImplementedException();
+            normal = inNormal;
+            distance = d;
         }
 
         MyPlane(Vec3 a, Vec3 b, Vec3 c)
         {
-            throw new NotImplementedException();
+            normal = Vec3.Cross(b - a, c - a).normalized;
+            distance = Vec3.Dot(normal, a);
         }
 
         #endregion
