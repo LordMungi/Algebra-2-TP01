@@ -1,5 +1,6 @@
 ﻿using CustomMath;
 using System.Collections.Generic;
+using System;
 
 public class ThiessenPolygon
 {
@@ -19,20 +20,24 @@ public class ThiessenPolygon
 
     public void RemoveRedundantPlanes()
     {
+        Planes.Sort((a, b) => MathF.Abs(b.GetDistanceToPoint(center)).CompareTo(MathF.Abs(a.GetDistanceToPoint(center))));
         for (int i = Planes.Count - 1; i >= 0; i--)
         {
-            if (isPlaneRedundant(Planes[i]))
+            if (Planes.Count <= 1) break;
+            if (isPlaneRedundant(i))
                 Planes.RemoveAt(i);
         }
-
     }
 
-    private bool isPlaneRedundant(MyPlane plane)
+    private bool isPlaneRedundant(int planeIndex)
     {
-        Vec3 closestPointToCenter = plane.ClosestPointOnPlane(center);
-        foreach (MyPlane other in Planes)
+        Vec3 closestPointToCenter = Planes[planeIndex].ClosestPointOnPlane(center);
+
+        for (int i = 0; i < Planes.Count; i++)
         {
-            if (!other.GetSide(closestPointToCenter))
+            if (i == planeIndex) continue;
+
+            if (Planes[i].GetSide(closestPointToCenter))
             {
                 return false;
             }

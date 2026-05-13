@@ -33,12 +33,11 @@ public class Voronoi : MonoBehaviour
         {
             for (int j = i + 1; j < Regions.Count; j++)
             {
-                Vec3 vec = Regions[j].center - Regions[i].center;
-                Vec3 midpoint = Regions[i].center + vec / 2;
-
+                Vec3 vec = Regions[i].center - Regions[j].center;
+                Vec3 midpoint = Regions[j].center + vec / 2;
 
                 Regions[i].AddPlane(new MyPlane(vec, midpoint));
-                Regions[j].AddPlane(Regions[i].Planes[^1].planeFlipped);
+                Regions[j].AddPlane(new MyPlane(-vec, midpoint));
             }
         }
 
@@ -52,9 +51,11 @@ public class Voronoi : MonoBehaviour
     {
         foreach (ThiessenPolygon region in Regions)
         {
+            Color regionColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 0.3f);
             foreach (MyPlane plane in region.Planes)
             {
-                Instantiate(PlanePrefab, plane.normal * plane.distance, Quaternion.FromToRotation(Vec3.Up, plane.normal));
+                Instantiate(PlanePrefab, plane.ClosestPointOnPlane(region.center), Quaternion.FromToRotation(Vec3.Up, plane.normal))
+                .GetComponent<Renderer>().material.color = regionColor;
             }
         }
     }
