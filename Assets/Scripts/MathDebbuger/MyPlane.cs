@@ -27,7 +27,7 @@ namespace CustomMath
 
         MyPlane(Vec3 inNormal, float d)
         {
-            normal = inNormal;
+            normal = inNormal.normalized;
             distance = d;
         }
 
