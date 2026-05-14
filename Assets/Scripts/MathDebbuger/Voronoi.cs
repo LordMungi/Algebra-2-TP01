@@ -43,7 +43,7 @@ public class Voronoi : MonoBehaviour
 
         foreach (ThiessenPolygon region in Regions)
         {
-            region.RemoveRedundantPlanes();
+            //region.RemoveRedundantPlanes();
         }
     }
 

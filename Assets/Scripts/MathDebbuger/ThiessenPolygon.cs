@@ -22,7 +22,6 @@ public class ThiessenPolygon
     {
         for (int i = Planes.Count - 1; i >= 0; i--)
         {
-            //if (Planes.Count <= 1) break;
             if (isPlaneRedundant(i))
                 Planes.RemoveAt(i);
         }
