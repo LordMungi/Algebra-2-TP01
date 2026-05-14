@@ -1,11 +1,16 @@
 using CustomMath;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Voronoi : MonoBehaviour
 {
     [SerializeField] private GameObject PlanePrefab;
     [SerializeField] private GameObject PointsOfInterestObjects;
+    [SerializeField] private GameObject player;
+    [SerializeField] private TextMeshProUGUI text;
+
+    private float PlayerInPolygonID;
 
     private List<Vec3> PointsOfInterest;
     private List<ThiessenPolygon> Regions;
@@ -22,11 +27,33 @@ public class Voronoi : MonoBehaviour
         BuildRegions();
     }
 
+    private void Update()
+    {
+        foreach (ThiessenPolygon region in Regions)
+        {
+            bool isInsidePolygon = true;
+            foreach (MyPlane plane in region.Planes)
+            {
+                if (!plane.GetSide(player.transform.position))
+                {
+                    isInsidePolygon = false;
+                    break;
+                }
+            }
+            if (isInsidePolygon)
+            {
+                PlayerInPolygonID = region.id;
+                break;
+            }
+        }
+        text.text = "Player in Region: " + PlayerInPolygonID;
+    }
+
     private void SetRegions()
     {
-        foreach (Vec3 point in PointsOfInterest)
+        for (int i = 0; i < PointsOfInterest.Count; i++)
         {
-            Regions.Add(new ThiessenPolygon(point));
+            Regions.Add(new ThiessenPolygon(PointsOfInterest[i], i));
         }
 
         for (int i = 0; i < Regions.Count; i++)

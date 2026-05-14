@@ -4,11 +4,14 @@ using System;
 
 public class ThiessenPolygon
 {
+    public int id;
+
     public Vec3 center;
     public List<MyPlane> Planes;
 
-    public ThiessenPolygon(Vec3 point)
+    public ThiessenPolygon(Vec3 point, int number)
     {
+        id = number;
         center = point;
         Planes = new List<MyPlane>();
     }
