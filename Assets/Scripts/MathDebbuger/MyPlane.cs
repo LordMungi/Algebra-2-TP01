@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace CustomMath
 {
@@ -49,6 +50,11 @@ namespace CustomMath
         public static bool operator !=(MyPlane lhs, MyPlane rhs)
         {
             return !(lhs == rhs);
+        }
+
+        public static implicit operator MyPlane(Plane p)
+        {
+            return new MyPlane(-p.normal, p.distance);
         }
 
         #endregion

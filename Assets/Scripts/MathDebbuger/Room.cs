@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Room : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer[] objects;
+
     private MyPlane[] planes = new MyPlane[6];
     private Color color;
 
@@ -51,6 +53,18 @@ public class Room : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    public void HideRoom()
+    {
+        foreach (MeshRenderer m in objects)
+            m.enabled = false;
+    }
+
+    public void ShowRoom()
+    {
+        foreach (MeshRenderer m in objects)
+            m.enabled = true;
     }
 
     private void OnDrawGizmos()
